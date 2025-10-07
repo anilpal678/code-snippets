@@ -1,0 +1,14 @@
+var gaUsr = new GlideAggregate('sys_user');
+gaUsr.addActiveQuery();
+gaUsr.addAggregate('COUNT','email');
+gaUsr.addHaving('COUNT','>','1');
+gaUsr.query();
+while (gaUsr.next()) {
+    var email = gaUsr.email.toString();
+    if (!email) {
+        gs.print('Empty');
+    } else {
+        gs.print(email + ' Count: ' + gaUsr.getAggregate('COUNT'));
+    }
+
+}
